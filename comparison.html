@@ -4,50 +4,89 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>The Comparison Page</title>
+		<link rel="stylesheet" type="text/css" href="assets/comparison.css" />
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script src="assets/comparison.js" defer></script>
 	</head>
 	<body>
-		<h1>Your Engagement Statistics...</h1>
+		<div class="header">
+			<h1>Your Engagement Statistics...</h1>
+		</div>
 
-		<h4>Username:</h4>
-		<p id="username"></p>
-		<h4>Followers:</h4>
-		<p id="follower_count"></p>
+		<div class="container-main">
+			<div>
+				<h4>Username:</h4>
+				<p id="username"></p>
+			</div>
+			<div>
+				<h4>Followers:</h4>
+				<p id="follower_count"></p>
+			</div>
+		</div>
 
-		<h3>Seven Day Statistics...</h3>
+		<div class="header">
+			<h3>Seven Day Statistics...</h3>
+		</div>
 
-		<p>Total Tweets:</p>
-		<span id="total_tweets"></span>
-		<p>Total Retweets:</p>
-		<span id="total_retweets"></span>
-		<p>Total Likes:</p>
-		<span id="total_likes"></span>
-		<p>Retweets Per Follower:</p>
-		<span id="retweets_per_follower"></span>
-		<p>Likes Per Follower:</p>
-		<span id="likes_per_follower"></span>
-		<p>Retweets Per Follower:</p>
-		<span id="retweet_per_tweet"></span>
-		<p>Likes Per Follower:</p>
-		<span id="like_per_tweet"></span>
+		<div class="container">
+			<div>
+				<p>Total Tweets:</p>
+				<span id="total_tweets"></span>
+			</div>
+			<div>
+				<p>Total Retweets:</p>
+				<span id="total_retweets"></span>
+			</div>
+			<div>
+				<p>Total Likes:</p>
+				<span id="total_likes"></span>
+			</div>
+		</div>
+		<div class="container">
+			<div>
+				<p>Retweets Per Follower:</p>
+				<span id="retweets_per_follower"></span>
+			</div>
+			<div>
+				<p>Likes Per Follower:</p>
+				<span id="likes_per_follower"></span>
+			</div>
+		</div>
+		<div class="container">
+			<div>
+				<p>Retweets Per Follower:</p>
+				<span id="retweet_per_tweet"></span>
+			</div>
+			<div>
+				<p>Likes Per Follower:</p>
+				<span id="like_per_tweet"></span>
+			</div>
+		</div>
 
-		<h3>Thirty Day Statistics...</h3>
+		<div class="header">
+			<h3>Thirty Day Statistics...</h3>
+		</div>
 
-		<p>Total Tweets:</p>
-		<p id="total_tweets_30"></p>
-		<p>Total Retweets:</p>
-		<p id="total_retweets_30"></p>
-		<p>Total Likes:</p>
-		<p id="total_likes_30"></p>
-		<p>Retweets Per Follower:</p>
-		<p id="retweets_per_follower_30"></p>
-		<p>Likes Per Follower:</p>
-		<p id="likes_per_follower_30"></p>
-		<p>Retweets Per Follower:</p>
-		<p id="retweet_per_tweet_30"></p>
-		<p>Likes Per Follower:</p>
-		<p id="like_per_tweet_30"></p>
+		<div class="container">
+			<p>Total Tweets:</p>
+			<p id="total_tweets_30"></p>
+			<p>Total Retweets:</p>
+			<p id="total_retweets_30"></p>
+			<p>Total Likes:</p>
+			<p id="total_likes_30"></p>
+		</div>
+		<div class="container">
+			<p>Retweets Per Follower:</p>
+			<p id="retweets_per_follower_30"></p>
+			<p>Likes Per Follower:</p>
+			<p id="likes_per_follower_30"></p>
+		</div>
+		<div class="container">
+			<p>Retweets Per Follower:</p>
+			<p id="retweet_per_tweet_30"></p>
+			<p>Likes Per Follower:</p>
+			<p id="like_per_tweet_30"></p>
+		</div>
 
 		<h1>Compare to...</h1>
 		<p>more placeholder text</p>

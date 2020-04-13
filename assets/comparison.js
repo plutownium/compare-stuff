@@ -24,6 +24,9 @@ function getSevenDaysResults(user) {
 
 	axios.get(url_seven).then((x) => {
 		console.log(url_seven);
+		usernameTag.innerHTML = x.data.username;
+		followerCount.innerHTML = x.data.followers;
+
 		totalTweets.innerHTML = x.data.total_tweets;
 		totalRetweets.innerHTML = x.data.total_retweets;
 		totalLikes.innerHTML = x.data.total_likes;
@@ -39,6 +42,9 @@ function getThirtyDaysResults(user) {
 
 	axios.get(url_thirty).then((x) => {
 		console.log(url_thirty);
+		usernameTag.innerHTML = x.data.username;
+		followerCount.innerHTML = x.data.followers;
+
 		totalTweets30.innerHTML = x.data.total_tweets;
 		totalRetweets30.innerHTML = x.data.total_retweets;
 		totalLikes30.innerHTML = x.data.total_likes;
@@ -55,10 +61,10 @@ const thirtyDays = "http://127.0.0.1:5000/user/rolypolyistaken/days=30";
 // console.log(axios.get(sevenDays).then((x) => console.log(x)));
 // console.log(axios.get(thirtyDays).then((x) => console.log(x)));
 
-axios.get(sevenDays).then((x) => {
-	console.log(x.data.like_per_tweet);
-	axios.get(thirtyDays).then((x) => console.log(x.data.like_per_tweet));
-});
+// axios.get(sevenDays).then((x) => {
+// 	console.log(x.data.like_per_tweet);
+// 	axios.get(thirtyDays).then((x) => console.log(x.data.like_per_tweet));
+// });
 
-// getSevenDaysResults("rolypolyistaken");
-// getThirtyDaysResults("rolypolyistaken");
+getSevenDaysResults("rolypolyistaken");
+getThirtyDaysResults("rolypolyistaken");
