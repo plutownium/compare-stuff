@@ -4,7 +4,8 @@ import time
 
 from datetime import datetime, timedelta
 
-
+# ### Consumer token, secret, access token, secret, all removed for git commit.
+# To restore, go to the .gitignore'd text file, restore them.
 
 
 # ### Authenticate with Twitter using OAuth
@@ -142,7 +143,7 @@ def last_thirty_days(screen_name):
     return all_tweets
 
 
-def get_avg_engagement(user, content, days):
+def get_avg_engagement(user, content, days, followers):
     total_tweets = len(content)
     content_retweets = 0
     content_likes = 0
@@ -154,13 +155,45 @@ def get_avg_engagement(user, content, days):
     retweet_per_tweet = float(content_retweets / total_tweets)
     like_per_tweet = float(content_likes / total_tweets)
 
+    retweet_per_follower = float(content_retweets / followers)
+    like_per_follower = float(content_likes / followers)
+
     return {"username": user,
             "days": days,
             "total_tweets": total_tweets,
             "total_retweets": content_retweets,
             "total_likes": content_likes,
+            "followers": followers,
+            "retweet_per_follower": retweet_per_follower,
+            "like_per_follower": like_per_follower,
             "retweet_per_tweet": retweet_per_tweet,
             "like_per_tweet": like_per_tweet}
+
+
+app = Flask(__name__)
+
+
+@app.route("/user/<user>/days=7")
+def user_data_seven_days(user):
+    user_followers = api.get_user(user).followers_count
+    tweets_seven = last_seven_days(user)
+    data = get_avg_engagement(user, tweets_seven, days=7, followers=user_followers)
+
+    return jsonify(data)
+
+
+@app.route("/user/<user>/days=30")
+def user_data_thirty_days(user):
+    user_followers = api.get_user(user).followers_count
+    tweets_thirty = last_thirty_days(user)
+    data = get_avg_engagement(user, tweets_thirty, days=30, followers=user_followers)
+
+    return jsonify(data)
+
+
+if __name__ == '__main__':
+    app.run()
+
 
 # start_time = time.time()
 # all_tweets_from_roly = get_all_tweets("rolypolyistaken")
@@ -170,9 +203,9 @@ def get_avg_engagement(user, content, days):
 # print(len(all_tweets_from_roly))
 
 
-roly = "rolypolyistaken"
-seven_days_prior = datetime.today() - timedelta(days=7)
-thirty_days_prior = datetime.today() - timedelta(days=30)
+# roly = "rolypolyistaken"
+# seven_days_prior = datetime.today() - timedelta(days=7)
+# thirty_days_prior = datetime.today() - timedelta(days=30)
 
 # print(seven_days_prior)
 #
@@ -183,13 +216,13 @@ thirty_days_prior = datetime.today() - timedelta(days=30)
 # print(tweets[0].created_at < seven_days_prior)
 
 # tweets = get_all_tweets(roly)
-total_RTs = 0
-total_likes = 0
-
-newer_than_seven_days_counter = 0
-newer_than_thirty_days_counter = 0
-seven_days_or_less_list = []
-thirty_days_or_less_list = []
+# total_RTs = 0
+# total_likes = 0
+#
+# newer_than_seven_days_counter = 0
+# newer_than_thirty_days_counter = 0
+# seven_days_or_less_list = []
+# thirty_days_or_less_list = []
 
 # for tweet in tweets:
 #     # print("New tweet:")
@@ -204,30 +237,10 @@ thirty_days_or_less_list = []
 #         print(tweet.created_at)
 #         newer_than_thirty_days_counter += 1
 
-print(newer_than_thirty_days_counter)
-print("Total RTs: {}\nTotal likes: {}".format(total_RTs, total_likes))
+# print(newer_than_thirty_days_counter)
+# print("Total RTs: {}\nTotal likes: {}".format(total_RTs, total_likes))
 
 # print(tweets[0].created_at)
 # print(type(tweets[0].created_at))  # <class 'datetime.datetime'>
 #
 # print(tweets[0].created_at < seven_days_prior)
-
-app = Flask(__name__)
-
-
-@app.route("/user?=<user>/days?=7")
-def user_data_seven_days(user):
-    tweets_seven = last_seven_days(user)
-    data = get_avg_engagement(user, tweets_seven, days=7)
-
-    return jsonify(data)
-
-
-@app.route("/user?=<user>/days?=30")
-def user_data_thirty_days(user):
-    tweets_thirty = last_thirty_days(user)
-    data = get_avg_engagement(user, tweets_thirty, days=30)
-
-    return jsonify(data)
-
-
