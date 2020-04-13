@@ -1,12 +1,20 @@
 import tweepy
 from flask import Flask, jsonify
+from flask_cors import CORS
 import time
 
 from datetime import datetime, timedelta
 
-# ### Consumer token, secret, access token, secret, all removed for git commit.
-# To restore, go to the .gitignore'd text file, restore them.
+f = open("secrets.txt", "r")
+api_data = f.read()
+f.close()
 
+single_lines = api_data.split("\n")
+consumer_token = single_lines[0].split('"')[1]
+consumer_secret = single_lines[1].split('"')[1]
+
+access_token = single_lines[2].split('"')[1]
+access_secret = single_lines[3].split('"')[1]
 
 # ### Authenticate with Twitter using OAuth
 auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
@@ -94,10 +102,11 @@ def last_seven_days(screen_name):
     all_tweets = []
 
     init_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False)
+    haul = len(init_tweets)
     for t in init_tweets:
         if t.created_at > bout_a_week_ago:
             all_tweets.append(t)
-    if len(all_tweets) < 200:
+    if len(all_tweets) != haul:
         return all_tweets
     else:
         still_more_to_go = True
@@ -105,11 +114,12 @@ def last_seven_days(screen_name):
             count = 0
             oldest = all_tweets[-1].id - 1
             next_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False, max_id=oldest)
+            new_haul = len(next_tweets)
             for t in next_tweets:
                 if t.created_at > bout_a_week_ago:
                     all_tweets.append(t)
                     count += 1
-            if count != 200:
+            if count != new_haul:
                 still_more_to_go = False
 
     return all_tweets
@@ -122,10 +132,11 @@ def last_thirty_days(screen_name):
     all_tweets = []
 
     init_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False)
+    haul = len(init_tweets)
     for t in init_tweets:
         if t.created_at > bout_a_month_ago:
             all_tweets.append(t)
-    if len(all_tweets) < 200:
+    if len(all_tweets) != haul:
         return all_tweets
     else:
         still_more_to_go = True
@@ -133,11 +144,12 @@ def last_thirty_days(screen_name):
             count = 0
             oldest = all_tweets[-1].id - 1
             next_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False, max_id=oldest)
+            new_haul = len(next_tweets)
             for t in next_tweets:
                 if t.created_at > bout_a_month_ago:
                     all_tweets.append(t)
                     count += 1
-            if count != 200:
+            if count != new_haul:
                 still_more_to_go = False
 
     return all_tweets
@@ -152,11 +164,11 @@ def get_avg_engagement(user, content, days, followers):
         content_retweets += item.retweet_count
         content_likes += item.favorite_count
 
-    retweet_per_tweet = float(content_retweets / total_tweets)
-    like_per_tweet = float(content_likes / total_tweets)
+    retweet_per_tweet = str(float(content_retweets / total_tweets))[0:6]
+    like_per_tweet = str(float(content_likes / total_tweets))[0:6]
 
-    retweet_per_follower = float(content_retweets / followers)
-    like_per_follower = float(content_likes / followers)
+    retweet_per_follower = str(float(content_retweets / followers))[0:6]
+    like_per_follower = str(float(content_likes / followers))[0:6]
 
     return {"username": user,
             "days": days,
@@ -171,12 +183,14 @@ def get_avg_engagement(user, content, days, followers):
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/user/<user>/days=7")
 def user_data_seven_days(user):
     user_followers = api.get_user(user).followers_count
     tweets_seven = last_seven_days(user)
+    print("Seven days: %s" % len(tweets_seven))
     data = get_avg_engagement(user, tweets_seven, days=7, followers=user_followers)
 
     return jsonify(data)
@@ -186,6 +200,7 @@ def user_data_seven_days(user):
 def user_data_thirty_days(user):
     user_followers = api.get_user(user).followers_count
     tweets_thirty = last_thirty_days(user)
+    print("Thirty days: %s" % len(tweets_thirty))
     data = get_avg_engagement(user, tweets_thirty, days=30, followers=user_followers)
 
     return jsonify(data)
