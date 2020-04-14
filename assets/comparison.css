@@ -9,7 +9,21 @@
 	border: 2px solid cyan;
 }
 
-.container-main {
+.container-parent {
+	background: #999;
+	padding: 10px;
+}
+
+.container-child {
+	background: #ccc;
+	height: 50px;
+	margin: 10px;
+}
+
+.container-child h4,
+.container-child p {
+	display: inline;
+	font-size: 16px;
 }
 
 .header {

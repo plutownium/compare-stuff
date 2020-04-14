@@ -141,6 +141,9 @@ def last_thirty_days(screen_name):
     else:
         still_more_to_go = True
         while still_more_to_go:
+            # Some users tweet more than 3200 times in 30 days. This next line deals with that condition.
+            if len(all_tweets) > 2900:
+                return all_tweets
             count = 0
             oldest = all_tweets[-1].id - 1
             next_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False, max_id=oldest)
