@@ -6,6 +6,11 @@ const followerCount = document.getElementById("follower_count");
 const totalTweets = document.getElementById("total_tweets");
 const totalRetweets = document.getElementById("total_retweets");
 const totalLikes = document.getElementById("total_likes");
+
+const tweetsPerDay = document.getElementById("tweets_per_day");
+const retweetsPerDay = document.getElementById("retweets_per_day");
+const likesPerDay = document.getElementById("likes_per_day");
+
 const retweetsPerFollower = document.getElementById("retweets_per_follower");
 const likesPerFollower = document.getElementById("likes_per_follower");
 const retweetPerTweet = document.getElementById("retweet_per_tweet");
@@ -31,6 +36,13 @@ const comparisonFollowers = document.getElementById(
 const totalTweetsComparison = document.getElementById("comp_total_tweets");
 const totalRetweetsComparison = document.getElementById("comp_total_retweets");
 const totalLikesComparison = document.getElementById("comp_total_likes");
+
+const tweetsPerDayComparison = document.getElementById("comp_tweets_per_day");
+const retweetsPerDayComparison = document.getElementById(
+	"comp_retweets_per_day"
+);
+const likesPerDayComparison = document.getElementById("comp_likes_per_day");
+
 const retweetsPerFollowerComparison = document.getElementById(
 	"comp_retweets_per_follower"
 );
@@ -74,6 +86,11 @@ function sevenDaysResults(user) {
 		totalTweets.innerHTML = x.data.total_tweets;
 		totalRetweets.innerHTML = x.data.total_retweets;
 		totalLikes.innerHTML = x.data.total_likes;
+
+		tweetsPerDay.innerHTML = x.data.tweets_per_day;
+		retweetsPerDay.innerHTML = x.data.retweets_per_day;
+		likesPerDay.innerHTML = x.data.likes_per_day;
+
 		retweetsPerFollower.innerHTML = x.data.retweet_per_follower;
 		likesPerFollower.innerHTML = x.data.like_per_follower;
 		retweetPerTweet.innerHTML = x.data.retweet_per_tweet;
@@ -105,12 +122,18 @@ function sevenDaysResultsComparison(user) {
 
 	axios.get(url_seven).then((x) => {
 		console.log(url_seven);
+		console.log(x);
 		comparisonUsername.innerHTML = x.data.username;
 		comparisonFollowers.innerHTML = x.data.followers;
 
 		totalTweetsComparison.innerHTML = x.data.total_tweets;
 		totalRetweetsComparison.innerHTML = x.data.total_retweets;
 		totalLikesComparison.innerHTML = x.data.total_likes;
+
+		tweetsPerDayComparison.innerHTML = x.data.tweets_per_day;
+		retweetsPerDayComparison.innerHTML = x.data.retweets_per_day;
+		likesPerDayComparison.innerHTML = x.data.likes_per_day;
+
 		retweetsPerFollowerComparison.innerHTML = x.data.retweet_per_follower;
 		likesPerFollowerComparison.innerHTML = x.data.like_per_follower;
 		retweetPerTweetComparison.innerHTML = x.data.retweet_per_tweet;
@@ -158,5 +181,12 @@ sevenDaysResults(targetUser);
 // thirtyDaysResults("rolypolyistaken");
 
 const comparisonBtn = document.getElementById("comparison_btn");
-
 comparisonBtn.addEventListener("click", doComparison);
+
+const linkPath = document.getElementById("link-path");
+const pageUrl = `C:\\Users\\Roland\\2020-Coding-Projects\\TwitterComparisonPage\\comparison.html?${targetUser}|${comparisonTarget}`;
+
+// 1. start with the base case: link path shows "?targetuser"
+// 2. on comparison select, link path shows "?targetUser|comparisonTarget"
+
+// code checks on page load: "is there 1 param or 2?" if 2, send request for *both* main user and comparison user

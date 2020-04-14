@@ -167,6 +167,10 @@ def get_avg_engagement(user, content, days, followers):
         content_retweets += item.retweet_count
         content_likes += item.favorite_count
 
+    tweets_per_day = str(float(total_tweets / days))[0:6]
+    retweets_per_day = str(float(content_retweets / days))[0:6]
+    likes_per_day = str(float(content_likes / days))[0:6]
+
     retweet_per_tweet = str(float(content_retweets / total_tweets))[0:6]
     like_per_tweet = str(float(content_likes / total_tweets))[0:6]
 
@@ -178,6 +182,9 @@ def get_avg_engagement(user, content, days, followers):
             "total_tweets": total_tweets,
             "total_retweets": content_retweets,
             "total_likes": content_likes,
+            "tweets_per_day": tweets_per_day,
+            "retweets_per_day": retweets_per_day,
+            "likes_per_day": likes_per_day,
             "followers": followers,
             "retweet_per_follower": retweet_per_follower,
             "like_per_follower": like_per_follower,
@@ -199,14 +206,14 @@ def user_data_seven_days(user):
     return jsonify(data)
 
 
-@app.route("/user/<user>/days=30")
-def user_data_thirty_days(user):
-    user_followers = api.get_user(user).followers_count
-    tweets_thirty = last_thirty_days(user)
-    print("Thirty days: %s" % len(tweets_thirty))
-    data = get_avg_engagement(user, tweets_thirty, days=30, followers=user_followers)
-
-    return jsonify(data)
+# @app.route("/user/<user>/days=30")
+# def user_data_thirty_days(user):
+#     user_followers = api.get_user(user).followers_count
+#     tweets_thirty = last_thirty_days(user)
+#     print("Thirty days: %s" % len(tweets_thirty))
+#     data = get_avg_engagement(user, tweets_thirty, days=30, followers=user_followers)
+#
+#     return jsonify(data)
 
 
 if __name__ == '__main__':
