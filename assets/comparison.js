@@ -123,6 +123,8 @@ function sevenDaysResultsComparison(user) {
 function doComparison(comparisonTarget) {
 	// note: when doComparison is passed w/o any specified param, an event object takes the place of comparisonTarget.
 	// so it's necessary to check if "type of comparisonTarget is string"
+	spinnerSection = document.getElementById("spinner_container");
+	spinnerSection.innerHTML = `<div id="comparison_spinner" class="loader">Loading...</div>`;
 
 	// if there is no value passed in as the comparisonTarget param... and comparisonTarget is type event...
 	if (typeof comparisonTarget != "string") {
