@@ -101,7 +101,7 @@ def last_seven_days(screen_name):
     bout_a_week_ago = datetime.today() - timedelta(days=7)
     all_tweets = []
 
-    init_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False)
+    init_tweets = api.user_timeline(screen_name=screen_name, count=200, exclude_replies=True, include_rts=False)
     haul = len(init_tweets)
     for t in init_tweets:
         if t.created_at > bout_a_week_ago:
@@ -113,7 +113,8 @@ def last_seven_days(screen_name):
         while still_more_to_go:
             count = 0
             oldest = all_tweets[-1].id - 1
-            next_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False, max_id=oldest)
+            next_tweets = api.user_timeline(screen_name=screen_name, count=200, exclude_replies=True,
+                                            include_rts=False, max_id=oldest)
             new_haul = len(next_tweets)
             for t in next_tweets:
                 if t.created_at > bout_a_week_ago:
@@ -131,7 +132,7 @@ def last_thirty_days(screen_name):
     bout_a_month_ago = datetime.today() - timedelta(days=30)
     all_tweets = []
 
-    init_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False)
+    init_tweets = api.user_timeline(screen_name=screen_name, count=200, exclude_replies=True, include_rts=False)
     haul = len(init_tweets)
     for t in init_tweets:
         if t.created_at > bout_a_month_ago:
@@ -146,7 +147,8 @@ def last_thirty_days(screen_name):
                 return all_tweets
             count = 0
             oldest = all_tweets[-1].id - 1
-            next_tweets = api.user_timeline(screen_name=screen_name, count=200, include_rts=False, max_id=oldest)
+            next_tweets = api.user_timeline(screen_name=screen_name, count=200,  exclude_replies=True,
+                                            include_rts=False, max_id=oldest)
             new_haul = len(next_tweets)
             for t in next_tweets:
                 if t.created_at > bout_a_month_ago:
@@ -166,6 +168,9 @@ def get_avg_engagement(user, content, days, followers):
     for item in content:
         content_retweets += item.retweet_count
         content_likes += item.favorite_count
+
+    most_recent_tweet_timestamp = content[0].created_at
+    last_tweet_timestamp = content[-1].created_at
 
     tweets_per_day = str(float(total_tweets / days))[0:6]
     retweets_per_day = str(float(content_retweets / days))[0:6]
@@ -189,7 +194,9 @@ def get_avg_engagement(user, content, days, followers):
             "retweet_per_follower": retweet_per_follower,
             "like_per_follower": like_per_follower,
             "retweet_per_tweet": retweet_per_tweet,
-            "like_per_tweet": like_per_tweet}
+            "like_per_tweet": like_per_tweet,
+            "most_recent_timestamp": most_recent_tweet_timestamp,
+            "last_tweet_timestamp": last_tweet_timestamp}
 
 
 app = Flask(__name__)

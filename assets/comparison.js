@@ -2,6 +2,7 @@
 // elements of the User Section
 const usernameTag = document.getElementById("username");
 const followerCount = document.getElementById("follower_count");
+const tweetsSince = document.getElementById("since_field");
 
 const totalTweets = document.getElementById("total_tweets");
 const totalRetweets = document.getElementById("total_retweets");
@@ -22,6 +23,7 @@ const comparisonUsername = document.getElementById("comparison_username");
 const comparisonFollowers = document.getElementById(
 	"comparison_follower_count"
 );
+const comparisonTweetsSince = document.getElementById("comparison_since_field");
 
 const totalTweetsComparison = document.getElementById("comp_total_tweets");
 const totalRetweetsComparison = document.getElementById("comp_total_retweets");
@@ -55,8 +57,10 @@ function sevenDaysResults(user) {
 
 	axios.get(url_seven).then((x) => {
 		console.log(url_seven);
+
 		usernameTag.innerHTML = x.data.username;
 		followerCount.innerHTML = x.data.followers;
+		tweetsSince.innerHTML = new Date(x.data.last_tweet_timestamp);
 
 		totalTweets.innerHTML = x.data.total_tweets;
 		totalRetweets.innerHTML = x.data.total_retweets;
@@ -71,8 +75,10 @@ function sevenDaysResults(user) {
 		retweetPerTweet.innerHTML = x.data.retweet_per_tweet;
 		likePerTweet.innerHTML = x.data.like_per_tweet;
 
-		spinnerElFromUser.parentNode.removeChild(spinnerElFromUser);
-		hiddenStatsFromUser.classList.remove("hidden-while-loading");
+		if (spinnerElFromUser) {
+			spinnerElFromUser.parentNode.removeChild(spinnerElFromUser);
+			hiddenStatsFromUser.classList.remove("hidden-while-loading");
+		}
 	});
 }
 
@@ -87,6 +93,7 @@ function sevenDaysResultsComparison(user) {
 		console.log(x);
 		comparisonUsername.innerHTML = x.data.username;
 		comparisonFollowers.innerHTML = x.data.followers;
+		comparisonTweetsSince.innerHTML = new Date(x.data.last_tweet_timestamp);
 
 		totalTweetsComparison.innerHTML = x.data.total_tweets;
 		totalRetweetsComparison.innerHTML = x.data.total_retweets;
@@ -101,8 +108,12 @@ function sevenDaysResultsComparison(user) {
 		retweetPerTweetComparison.innerHTML = x.data.retweet_per_tweet;
 		likePerTweetComparison.innerHTML = x.data.like_per_tweet;
 
-		spinnerElFromComparison.parentNode.removeChild(spinnerElFromComparison);
-		hiddenStatsFromComparison.classList.remove("hidden-while-loading");
+		if (spinnerElFromComparison) {
+			spinnerElFromComparison.parentNode.removeChild(
+				spinnerElFromComparison
+			);
+			hiddenStatsFromComparison.classList.remove("hidden-while-loading");
+		}
 
 		pageUrl = `C:\\Users\\Roland\\2020-Coding-Projects\\TwitterComparisonPage\\comparison.html?${targetUser}|${x.data.username}`;
 		linkPath.innerHTML = pageUrl;

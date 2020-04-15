@@ -1,7 +1,7 @@
 #link-container {
 	margin: 15px;
 	padding: 10px;
-	background: red;
+	background: #ddd;
 	height: auto;
 	width: auto;
 	text-align: center;
@@ -21,14 +21,18 @@
 }
 
 .container {
-	border: 2px solid blue;
+	/* border: 2px solid blue; */
 	background-color: #eeeeee;
 	display: flex;
 	justify-content: center;
 }
 
 .container div {
-	border: 2px solid cyan;
+	/* border: 2px solid cyan; */
+	margin: 5px;
+	padding: 5px;
+	text-align: center;
+	background: #ddd;
 }
 
 .container-parent {
@@ -39,7 +43,10 @@
 .container-child {
 	background: #ccc;
 	height: 50px;
+	padding: 10px;
 	margin: 10px;
+	height: auto;
+	width: auto;
 }
 
 .container-child h4,
@@ -49,7 +56,7 @@
 }
 
 .header {
-	border: 3px solid red;
+	/* border: 3px solid red; */
 	background-color: #eeeeee;
 	text-align: center;
 }
