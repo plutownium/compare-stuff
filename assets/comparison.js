@@ -50,6 +50,8 @@ const likePerTweetComparison = document.getElementById("comp_like_per_tweet");
 
 function sevenDaysResults(user) {
 	url_seven = `http://127.0.0.1:5000/user/${user}/days=7`;
+	spinnerElFromUser = document.getElementById("user_spinner");
+	hiddenStatsFromUser = document.getElementById("user_hidden");
 
 	axios.get(url_seven).then((x) => {
 		console.log(url_seven);
@@ -68,12 +70,17 @@ function sevenDaysResults(user) {
 		likesPerFollower.innerHTML = x.data.like_per_follower;
 		retweetPerTweet.innerHTML = x.data.retweet_per_tweet;
 		likePerTweet.innerHTML = x.data.like_per_tweet;
+
+		spinnerElFromUser.parentNode.removeChild(spinnerElFromUser);
+		hiddenStatsFromUser.classList.remove("hidden-while-loading");
 	});
 }
 
 function sevenDaysResultsComparison(user) {
 	// ### Comparison User Function
 	url_seven = `http://127.0.0.1:5000/user/${user}/days=7`;
+	spinnerElFromComparison = document.getElementById("comparison_spinner");
+	hiddenStatsFromComparison = document.getElementById("comparison_hidden");
 
 	axios.get(url_seven).then((x) => {
 		console.log(url_seven);
@@ -93,6 +100,9 @@ function sevenDaysResultsComparison(user) {
 		likesPerFollowerComparison.innerHTML = x.data.like_per_follower;
 		retweetPerTweetComparison.innerHTML = x.data.retweet_per_tweet;
 		likePerTweetComparison.innerHTML = x.data.like_per_tweet;
+
+		spinnerElFromComparison.parentNode.removeChild(spinnerElFromComparison);
+		hiddenStatsFromComparison.classList.remove("hidden-while-loading");
 
 		pageUrl = `C:\\Users\\Roland\\2020-Coding-Projects\\TwitterComparisonPage\\comparison.html?${targetUser}|${x.data.username}`;
 		linkPath.innerHTML = pageUrl;
