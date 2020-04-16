@@ -9,245 +9,177 @@
 		<script src="assets/comparison.js" defer></script>
 	</head>
 	<body>
-		<div class="header">
-			<h1>Your Engagement Statistics...</h1>
-		</div>
+		<div id="main-container">
+			<div id="left-side">
+				<div class="header">
+					<h1>Your Engagement Statistics...</h1>
+				</div>
 
-		<div class="container-parent">
-			<div class="container-child">
-				<h4>Username:</h4>
-				<p id="username"></p>
-			</div>
-			<div class="container-child">
-				<h4>Followers:</h4>
-				<p id="follower_count"></p>
-			</div>
-			<div class="container-child">
-				<h4>Showing Tweets Since:</h4>
-				<p id="since_field"></p>
-			</div>
-		</div>
+				<div class="container-parent">
+					<div class="container-child">
+						<h4>Username:</h4>
+						<p id="username"></p>
+					</div>
+					<div class="container-child">
+						<h4>Followers:</h4>
+						<p id="follower_count"></p>
+					</div>
+					<div class="container-child">
+						<h4>Showing Tweets Since:</h4>
+						<p id="since_field"></p>
+					</div>
+				</div>
 
-		<div class="header">
-			<h3>Seven Day Statistics...</h3>
-		</div>
+				<div class="header">
+					<h3>Seven Day Statistics...</h3>
+				</div>
 
-		<div id="user_spinner" class="loader">Loading...</div>
+				<div id="user_spinner" class="loader">Loading...</div>
 
-		<div id="user_hidden" class="hidden-while-loading">
-			<div class="container">
-				<div>
-					<p>Total Tweets:</p>
-					<span id="total_tweets"></span>
-				</div>
-				<div>
-					<p>Total Retweets:</p>
-					<span id="total_retweets"></span>
-				</div>
-				<div>
-					<p>Total Likes:</p>
-					<span id="total_likes"></span>
+				<div id="user_hidden" class="hidden-while-loading">
+					<div class="container">
+						<div>
+							<p>Total Tweets:</p>
+							<span id="total_tweets"></span>
+						</div>
+						<div>
+							<p>Total Retweets:</p>
+							<span id="total_retweets"></span>
+						</div>
+						<div>
+							<p>Total Likes:</p>
+							<span id="total_likes"></span>
+						</div>
+					</div>
+					<div class="container">
+						<div>
+							<p>Tweets Per Day:</p>
+							<span id="tweets_per_day"></span>
+						</div>
+						<div>
+							<p>Retweets Per Day:</p>
+							<span id="retweets_per_day"></span>
+						</div>
+						<div>
+							<p>Likes Per Day:</p>
+							<span id="likes_per_day"></span>
+						</div>
+					</div>
+					<div class="container">
+						<div>
+							<p>Retweets Per Follower:</p>
+							<span id="retweets_per_follower"></span>
+						</div>
+						<div>
+							<p>Likes Per Follower:</p>
+							<span id="likes_per_follower"></span>
+						</div>
+					</div>
+					<div class="container">
+						<div>
+							<p>Retweets Per Tweet:</p>
+							<span id="retweet_per_tweet"></span>
+						</div>
+						<div>
+							<p>Likes Per Tweet:</p>
+							<span id="like_per_tweet"></span>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="container">
-				<div>
-					<p>Tweets Per Day:</p>
-					<span id="tweets_per_day"></span>
-				</div>
-				<div>
-					<p>Retweets Per Day:</p>
-					<span id="retweets_per_day"></span>
-				</div>
-				<div>
-					<p>Likes Per Day:</p>
-					<span id="likes_per_day"></span>
-				</div>
-			</div>
-			<div class="container">
-				<div>
-					<p>Retweets Per Follower:</p>
-					<span id="retweets_per_follower"></span>
-				</div>
-				<div>
-					<p>Likes Per Follower:</p>
-					<span id="likes_per_follower"></span>
-				</div>
-			</div>
-			<div class="container">
-				<div>
-					<p>Retweets Per Tweet:</p>
-					<span id="retweet_per_tweet"></span>
-				</div>
-				<div>
-					<p>Likes Per Tweet:</p>
-					<span id="like_per_tweet"></span>
-				</div>
-			</div>
-		</div>
 
-		<!-- <div class="header">
-			<h3>Thirty Day Statistics...</h3>
-		</div>
-		
-		<div class="container">
-			<div>
-				<p>Total Tweets:</p>
-				<p id="total_tweets_30"></p>
-			</div>
-			<div>
-				<p>Total Retweets:</p>
-				<p id="total_retweets_30"></p>
-			</div>
-			<div>
-				<p>Total Likes:</p>
-				<p id="total_likes_30"></p>
-			</div>
-		</div>
-		<div class="container">
-			<div>
-				<p>Retweets Per Follower:</p>
-				<p id="retweets_per_follower_30"></p>
-			</div>
-			<div>
-				<p>Likes Per Follower:</p>
-				<p id="likes_per_follower_30"></p>
-			</div>
-		</div>
-		<div class="container">
-			<div>
-				<p>Retweets Per Tweet:</p>
-				<p id="retweet_per_tweet_30"></p>
-			</div>
-			<div>
-				<p>Likes Per Tweet:</p>
-				<p id="like_per_tweet_30"></p>
-			</div>
-		</div> -->
+			<div id="right-side">
+				<div class="header">
+					<h1>Compare to...</h1>
+				</div>
+				<div id="comparison_box" class="container">
+					<input
+						id="comparison_field"
+						name="comparison_field"
+						placeholder="The user to compare with..."
+					/>
+					<button id="comparison_btn" name="comparison_btn">
+						Go!
+					</button>
+				</div>
 
-		<div class="header">
-			<h1>Compare to...</h1>
-		</div>
-		<div id="comparison_box" class="container">
-			<input
-				id="comparison_field"
-				name="comparison_field"
-				placeholder="The user to compare with..."
-			/>
-			<button id="comparison_btn" name="comparison_btn">Go!</button>
-		</div>
+				<div class="container-parent">
+					<div class="container-child">
+						<h4>Username:</h4>
+						<p id="comparison_username"></p>
+					</div>
+					<div class="container-child">
+						<h4>Followers:</h4>
+						<p id="comparison_follower_count"></p>
+					</div>
+					<div class="container-child">
+						<h4>Showing Tweets Since:</h4>
+						<p id="comparison_since_field"></p>
+					</div>
+				</div>
 
-		<div class="container-parent">
-			<div class="container-child">
-				<h4>Username:</h4>
-				<p id="comparison_username"></p>
-			</div>
-			<div class="container-child">
-				<h4>Followers:</h4>
-				<p id="comparison_follower_count"></p>
-			</div>
-			<div class="container-child">
-				<h4>Showing Tweets Since:</h4>
-				<p id="comparison_since_field"></p>
-			</div>
-		</div>
+				<div class="header">
+					<h3>Seven Day Statistics...</h3>
+				</div>
 
-		<div class="header">
-			<h3>Seven Day Statistics...</h3>
-		</div>
+				<div id="spinner_container">
+					Type in a name to get started.
+				</div>
 
-		<div id="spinner_container">
-			Type in a name to get started...
-		</div>
-
-		<div id="comparison_hidden" class="hidden-while-loading">
-			<div class="container">
-				<div>
-					<p>Total Tweets:</p>
-					<span id="comp_total_tweets"></span>
-				</div>
-				<div>
-					<p>Total Retweets:</p>
-					<span id="comp_total_retweets"></span>
-				</div>
-				<div>
-					<p>Total Likes:</p>
-					<span id="comp_total_likes"></span>
-				</div>
-			</div>
-			<div class="container">
-				<div>
-					<p>Tweets Per Day:</p>
-					<span id="comp_tweets_per_day"></span>
-				</div>
-				<div>
-					<p>Retweets Per Day:</p>
-					<span id="comp_retweets_per_day"></span>
-				</div>
-				<div>
-					<p>Likes Per Day:</p>
-					<span id="comp_likes_per_day"></span>
-				</div>
-			</div>
-			<div class="container">
-				<div>
-					<p>Retweets Per Follower:</p>
-					<span id="comp_retweets_per_follower"></span>
-				</div>
-				<div>
-					<p>Likes Per Follower:</p>
-					<span id="comp_likes_per_follower"></span>
-				</div>
-			</div>
-			<div class="container">
-				<div>
-					<p>Retweets Per Tweet:</p>
-					<span id="comp_retweet_per_tweet"></span>
-				</div>
-				<div>
-					<p>Likes Per Tweet:</p>
-					<span id="comp_like_per_tweet"></span>
+				<div id="comparison_hidden" class="hidden-while-loading">
+					<div class="container">
+						<div>
+							<p>Total Tweets:</p>
+							<span id="comp_total_tweets"></span>
+						</div>
+						<div>
+							<p>Total Retweets:</p>
+							<span id="comp_total_retweets"></span>
+						</div>
+						<div>
+							<p>Total Likes:</p>
+							<span id="comp_total_likes"></span>
+						</div>
+					</div>
+					<div class="container">
+						<div>
+							<p>Tweets Per Day:</p>
+							<span id="comp_tweets_per_day"></span>
+						</div>
+						<div>
+							<p>Retweets Per Day:</p>
+							<span id="comp_retweets_per_day"></span>
+						</div>
+						<div>
+							<p>Likes Per Day:</p>
+							<span id="comp_likes_per_day"></span>
+						</div>
+					</div>
+					<div class="container">
+						<div>
+							<p>Retweets Per Follower:</p>
+							<span id="comp_retweets_per_follower"></span>
+						</div>
+						<div>
+							<p>Likes Per Follower:</p>
+							<span id="comp_likes_per_follower"></span>
+						</div>
+					</div>
+					<div class="container">
+						<div>
+							<p>Retweets Per Tweet:</p>
+							<span id="comp_retweet_per_tweet"></span>
+						</div>
+						<div>
+							<p>Likes Per Tweet:</p>
+							<span id="comp_like_per_tweet"></span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- <div class="header">
-			<h3>Thirty Day Statistics...</h3>
-		</div>
-
-		<div class="container">
-			<div>
-				<p>Total Tweets:</p>
-				<p id="comp_total_tweets_30"></p>
-			</div>
-			<div>
-				<p>Total Retweets:</p>
-				<p id="comp_total_retweets_30"></p>
-			</div>
-			<div>
-				<p>Total Likes:</p>
-				<p id="comp_total_likes_30"></p>
-			</div>
-		</div>
-		<div class="container">
-			<div>
-				<p>Retweets Per Follower:</p>
-				<p id="comp_retweets_per_follower_30"></p>
-			</div>
-			<div>
-				<p>Likes Per Follower:</p>
-				<p id="comp_likes_per_follower_30"></p>
-			</div>
-		</div>
-		<div class="container">
-			<div>
-				<p>Retweets Per Follower:</p>
-				<p id="comp_retweet_per_tweet_30"></p>
-			</div>
-			<div>
-				<p>Likes Per Follower:</p>
-				<p id="comp_like_per_tweet_30"></p>
-			</div>
-		</div> -->
+		<!-- <div id="chart_container"></div> -->
 
 		<div id="link-container">
 			<div>

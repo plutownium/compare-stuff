@@ -88,6 +88,10 @@ function sevenDaysResultsComparison(user) {
 	spinnerElFromComparison = document.getElementById("comparison_spinner");
 	hiddenStatsFromComparison = document.getElementById("comparison_hidden");
 
+	// // code for if & when i want to add a chart...
+	// getChart = document.getElementById("chart_container");
+	// getChart.innerHTML = `<canvas id="comparisonChart" width="300" height="300"></canvas>`;
+
 	axios.get(url_seven).then((x) => {
 		console.log(url_seven);
 		console.log(x);

@@ -112,3 +112,28 @@
 		transform: rotate(360deg);
 	}
 }
+
+/* DESKTOP RESPONSIVE FORMATTING */
+
+@media only screen and (min-width: 660px) {
+	#main-container {
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	#left-side {
+		margin: 20px;
+		padding: 30px;
+		background: #e0faff;
+		width: 45%;
+		border: 3px solid red;
+	}
+
+	#right-side {
+		margin: 20px;
+		padding: 30px;
+		background: #e0faff;
+		width: 45%;
+		border: 3px solid blue;
+	}
+}
